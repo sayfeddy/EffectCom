@@ -231,6 +231,11 @@
   }
   .modal-close:hover { color:var(--text); border-color:var(--text-muted); }
   .modal-icon { font-size:32px; margin-bottom:14px; }
+ .modal-icon img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
   .modal-title { font-family:'Unbounded',sans-serif; font-size:16px; font-weight:400; margin-bottom:10px; line-height:1.3; }
   .modal-body { font-size:14px; color:var(--text-muted); line-height:1.7; }
   .modal-body { font-size:15px; line-height:1.7; color:var(--text-muted);}
@@ -362,7 +367,7 @@
   <div class="media-pill" onclick="openModal('media-pinterest')">
     <img src="PIN.png" class="pill-icon-img" alt="Pinterest">Pinterest
   </div>
-  <div class="media-pill" onclick="openModal('media-podcast')"><span class="pill-icon">📽️</span>Фото / ВИдео</div>
+  <div class="media-pill" onclick="openModal('media-podcast')"><span class="pill-icon">📽️</span>Фото / Видео</div>
 </div>
 
   <p class="section-title">Лучшие стороны</p>
@@ -412,10 +417,10 @@ const data = {
   'shared-study':{ icon:'🛏', color:'#1D9E75', title:'Общажный быт', body:'Студенческая жизнь — это особый режим существования. Маленькие пространства, общие кухни, ночные разговоры. Это роднит быстрее, чем что угодно другое.' },
   'shared-inter':{ icon:'🛏', color:'#1D9E75', title:'Общажный быт', body:'Студенческая жизнь — это особый режим существования. Маленькие пространства, общие кухни, ночные разговоры. Это роднит быстрее, чем что угодно другое.' },
   'shared-art':{ icon:'⚡', color:'#1D9E75', title:'Энергетик', body:'Официальное топливо студенческих дедлайнов. Не рекомендуется врачами, но проверено практикой. Банка перед сдачей — священный ритуал.' },
-  'media-youtube':{ icon:'▶', color:'#1D9E75', title:'YouTube', body:'Документалки, обзоры, лекции и видеоэссе — всё то, что нельзя прочитать, нужно увидеть.' },
-  'media-telegram':{ icon:'✈', color:'#1D9E75', title:'Telegram', body:'Информация, общение, каналы по интересам. Быстро, без лишнего шума.' },
-  'media-pinterest':{ icon:'📌', color:'#1D9E75', title:'Pinterest', body:'Визуальный поиск для референсов, идей, настроений. Место, где собирается образ того, что хочешь создать.' },
-  'media-podcast':{ icon:'🎙', color:'#1D9E75', title:'Подкасты', body:'Формат, который идёт с тобой — в наушниках в дороге, на кухне, на прогулке. Дают глубину там, где короткий пост не справится.' }
+  'media-youtube':{ icon:'▶', iconImage:'YT.png', color:'#1D9E75', title:'YouTube', body:'Документалки, обзоры, лекции и видеоэссе — всё то, что нельзя прочитать, нужно увидеть.' },
+  'media-telegram':{ icon:'✈', iconImage:'TG.png', color:'#1D9E75', title:'Telegram', body:'Информация, общение, каналы по интересам. Быстро, без лишнего шума.' },
+  'media-pinterest':{ icon:'📌', color:'#1D9E75', iconImage:'PIN.png', title:'Pinterest', body:'Визуальный поиск для референсов, идей, настроений. Место, где собирается образ того, что хочешь создать.' },
+  'media-podcast':{ icon:'📽️', color:'#1D9E75', title:'Подкасты', body:'Формат, который идёт с тобой — в наушниках в дороге, на кухне, на прогулке. Дают глубину там, где короткий пост не справится.' }
 };
 
 function toggleHead(id) {
@@ -470,14 +475,24 @@ document.addEventListener('click', (e) => {
 
 function openModal(key) {
   const d = data[key]; if(!d) return;
-  document.getElementById('modal-icon').textContent  = d.icon;
+  
+  const modalIcon = document.getElementById('modal-icon');
+  
+  // Если есть изображение иконки — показываем его
+  if (d.iconImage) {
+    modalIcon.innerHTML = `<img src="${d.iconImage}" alt="${d.title}">`;
+  } else {
+    // Иначе — эмодзи
+    modalIcon.textContent = d.icon;
+  }
+  
   document.getElementById('modal-accent').style.background = d.color;
   document.getElementById('modal-title').textContent = d.title;
   
   const modalBody = document.getElementById('modal-body');
   modalBody.textContent = d.body;
   
-  // Если есть изображение, добавляем его
+  // Если есть изображение в теле модалки, добавляем его
   if (d.image) {
     const img = document.createElement('img');
     img.src = d.image;
