@@ -189,6 +189,13 @@
   }
   .media-pill:hover { border-color:var(--text-muted); color:var(--text); }
   .media-pill .pill-icon { font-size:14px; }
+ .pill-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: 0.9;
+  vertical-align: middle;
+}
 
   .best-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .best-card { border-radius:16px; padding:20px; border:1px solid; }
@@ -345,12 +352,18 @@
   </div>
 
   <p class="section-title">Медиаинструменты</p>
-  <div class="media-grid" style="margin-bottom:48px">
-    <div class="media-pill" onclick="openModal('media-youtube')"><span class="pill-icon">▶</span>YouTube</div>
-    <div class="media-pill" onclick="openModal('media-telegram')"><span class="pill-icon">✈</span>Telegram</div>
-    <div class="media-pill" onclick="openModal('media-pinterest')"><span class="pill-icon">📌</span>Pinterest</div>
-    <div class="media-pill" onclick="openModal('media-podcast')"><span class="pill-icon">🎙</span>Фото / Видео</div>
+<div class="media-grid" style="margin-bottom:48px">
+  <div class="media-pill" onclick="openModal('media-youtube')">
+    <img src="YT.png" class="pill-icon-img" alt="YouTube">YouTube
   </div>
+  <div class="media-pill" onclick="openModal('media-telegram')">
+    <img src="TG.png" class="pill-icon-img" alt="Telegram">Telegram
+  </div>
+  <div class="media-pill" onclick="openModal('media-pinterest')">
+    <img src="PIN.png" class="pill-icon-img" alt="Pinterest">Pinterest
+  </div>
+  <div class="media-pill" onclick="openModal('media-podcast')"><span class="pill-icon">📽️</span>Фото / ВИдео</div>
+</div>
 
   <p class="section-title">Лучшие стороны</p>
   <div class="best-grid">
